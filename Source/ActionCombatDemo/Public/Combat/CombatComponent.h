@@ -20,6 +20,9 @@ class ACTIONCOMBATDEMO_API UCombatComponent : public UActorComponent
 	UPROPERTY(VisibleAnywhere)
 	int ComboCounter { 0 };
 
+	UPROPERTY(VisibleAnywhere)
+	bool bCanAttack { true };
+
 public:	
 	// Sets default values for this component's properties
 	UCombatComponent();
@@ -34,4 +37,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ComboAttack();
+
+	UFUNCTION(BlueprintCallable)
+	void HandleResetAttack();
 };
