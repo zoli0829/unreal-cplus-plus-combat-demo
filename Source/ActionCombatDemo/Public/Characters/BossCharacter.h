@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "StatsComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
 #include "BossCharacter.generated.h"
@@ -15,6 +16,9 @@ class ACTIONCOMBATDEMO_API ABossCharacter : public ACharacter, public IEnemy
 public:
 	// Sets default values for this character's properties
 	ABossCharacter();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UStatsComponent* StatsComp;
 
 protected:
 	// Called when the game starts or when spawned

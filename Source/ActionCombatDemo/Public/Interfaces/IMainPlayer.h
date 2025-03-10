@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "MainPlayer.generated.h"
+#include "IMainPlayer.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
-class UMainPlayer : public UInterface
+class UIMainPlayer : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,7 +16,7 @@ class UMainPlayer : public UInterface
 /**
  * 
  */
-class ACTIONCOMBATDEMO_API IMainPlayer
+class ACTIONCOMBATDEMO_API IIMainPlayer
 {
 	GENERATED_BODY()
 
