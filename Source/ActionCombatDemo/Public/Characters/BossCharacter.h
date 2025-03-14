@@ -6,12 +6,18 @@
 #include "StatsComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
+#include "Characters/EEnemyState.h" 
 #include "BossCharacter.generated.h"
 
 UCLASS()
 class ACTIONCOMBATDEMO_API ABossCharacter : public ACharacter, public IEnemy
 {
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EEnemyState> InitialState;
+
+	class UBlackboardComponent* BlackboardComp;
 
 public:
 	// Sets default values for this character's properties
