@@ -19,6 +19,9 @@ class ACTIONCOMBATDEMO_API UBTT_RangeAttack : public UBTTaskNode
 
 	double Threshold{ 0.9 };
 
+	UPROPERTY(EditAnywhere)
+	float MeleeRange{ 1250.0f};
+
 public:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

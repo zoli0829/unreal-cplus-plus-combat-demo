@@ -3,6 +3,8 @@
 
 #include "Animations/PlayerAnimInstance.h"
 
+#include "KismetAnimationLibrary.h"
+
 void UPlayerAnimInstance::UpdateSpeed()
 {
 	APawn* PawnRef{ TryGetPawnOwner() };
@@ -27,7 +29,7 @@ void UPlayerAnimInstance::UpdateDirection()
 
 	if (!bIsInCombat) { return; };
 
-	CurrentDirection = CalculateDirection(
+	CurrentDirection = UKismetAnimationLibrary::CalculateDirection(
 		PawnRef->GetVelocity(),
 		PawnRef->GetActorRotation()
 	);
