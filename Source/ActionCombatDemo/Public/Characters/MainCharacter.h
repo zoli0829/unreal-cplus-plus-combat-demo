@@ -13,6 +13,9 @@ class ACTIONCOMBATDEMO_API AMainCharacter : public ACharacter, public IMainPlaye
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* DeathAnimMontage;
+
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
@@ -54,4 +57,8 @@ public:
 
 	virtual bool HasEnoughStamina(float Cost) override;
 
+	UFUNCTION(BlueprintCallable)
+	void HandleDeath();
+
+	virtual void EndLockonWithActor(AActor* ActorRef) override;
 };

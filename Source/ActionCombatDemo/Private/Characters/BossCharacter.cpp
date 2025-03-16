@@ -4,8 +4,13 @@
 #include "Characters/BossCharacter.h"
 #include "Characters/StatsComponent.h"
 #include "AIController.h"
+#include "BrainComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Combat/CombatComponent.h"
+#include "Characters/MainCharacter.h"
+#include "BrainComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Interfaces/MainPlayer.h"
 
 // Sets default values
 ABossCharacter::ABossCharacter()
@@ -22,16 +27,19 @@ void ABossCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BlackboardComp = GetController<AAIController>()->GetBlackboardComponent();
+	ControllerRef = GetController<AAIController>();
 
+	BlackboardComp = ControllerRef->GetBlackboardComponent();
 	BlackboardComp->SetValueAsEnum(TEXT("CurrentState"), InitialState);
+
+	// Subscribe to the player's death
+	GetWorld()->GetFirstPlayerController()->GetPawn<AMainCharacter>()->StatsComp->OnZeroHealthDelegate.AddDynamic(this, &ABossCharacter::HandlePlayerDeath);
 }
 
 // Called every frame
 void ABossCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -71,5 +79,31 @@ float ABossCharacter::GetAnimDuration()
 float ABossCharacter::GetMeleeRange()
 {
 	return StatsComp->Stats[EStat::MeleeRange];
+}
+
+void ABossCharacter::HandlePlayerDeath()
+{
+	ControllerRef->GetBlackboardComponent()->SetValueAsEnum(TEXT("CurrentState"), EEnemyState::GameOver);
+}
+
+void ABossCharacter::HandleDeath()
+{
+	float Duration { PlayAnimMontage(DeathAnim) };
+	ControllerRef->GetBrainComponent()->StopLogic("defeated");
+	FindComponentByClass<UCapsuleComponent>()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	FTimerHandle DestroyTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(DestroyTimerHandle, this, &ABossCharacter::FinishDeathAnimation, Duration, false);
+
+	IMainPlayer* PlayerRef{GetWorld()->GetFirstPlayerController()->GetPawn<IMainPlayer>()};
+
+	if (!PlayerRef) { return; }
+
+	PlayerRef->EndLockonWithActor(this);
+}
+
+void ABossCharacter::FinishDeathAnimation()
+{
+	Destroy();
 }
 
