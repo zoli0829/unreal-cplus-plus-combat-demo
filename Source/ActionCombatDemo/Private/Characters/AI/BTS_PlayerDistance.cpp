@@ -14,3 +14,9 @@ void UBTS_PlayerDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* Nod
 
 	OwnerComp.GetBlackboardComponent()->SetValueAsFloat(TEXT("Distance"), Distance);
 }
+
+UBTS_PlayerDistance::UBTS_PlayerDistance()
+{
+	// If I plan to have multiple characters of this kind in the level
+	bCreateNodeInstance = true;
+}

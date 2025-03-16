@@ -32,6 +32,9 @@ void UBTT_ChargeAttack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 
 UBTT_ChargeAttack::UBTT_ChargeAttack()
 {
+	// If I plan to have multiple characters of this kind in the level
+	bCreateNodeInstance = true;
+	
 	bNotifyTick = true;
 
 	MoveCompletedDelegate.BindUFunction(this, "HandleMoveCompleted");
