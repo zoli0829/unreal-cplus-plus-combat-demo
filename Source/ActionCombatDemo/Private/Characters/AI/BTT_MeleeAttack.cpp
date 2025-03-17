@@ -69,7 +69,7 @@ void UBTT_MeleeAttack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 
 UBTT_MeleeAttack::UBTT_MeleeAttack()
 {
-	// If I plan to have multiple characters of this kind in the level
+	// If I plan to have multiple enemies of this kind in the level
 	bCreateNodeInstance = true;
 	
 	MoveDelegate.BindUFunction(this, "FinishAttackTask");

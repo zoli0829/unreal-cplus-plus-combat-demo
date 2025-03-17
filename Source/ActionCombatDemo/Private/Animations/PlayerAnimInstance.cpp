@@ -26,7 +26,7 @@ void UPlayerAnimInstance::UpdateDirection()
 	APawn* PawnRef { TryGetPawnOwner() };
 
 	if (!IsValid(PawnRef)) { return; }
-
+	
 	if (!bIsInCombat) { return; };
 
 	CurrentDirection = UKismetAnimationLibrary::CalculateDirection(

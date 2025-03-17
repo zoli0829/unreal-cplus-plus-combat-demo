@@ -24,7 +24,6 @@ EBTNodeResult::Type UBTT_RangeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		OwnerComp.GetBlackboardComponent()->SetValueAsEnum(TEXT("CurrentState"), EEnemyState::Melee);
 
 		AbortTask(OwnerComp, NodeMemory);
-
 		return EBTNodeResult::Aborted;
 	}
 	
@@ -49,6 +48,6 @@ EBTNodeResult::Type UBTT_RangeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerC
 
 UBTT_RangeAttack::UBTT_RangeAttack()
 {
-	// If I plan to have multiple characters of this kind in the level
+	// If I plan to have multiple enemies of this kind in the level
 	bCreateNodeInstance = true;
 }

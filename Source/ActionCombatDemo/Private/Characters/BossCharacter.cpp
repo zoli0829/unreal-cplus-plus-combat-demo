@@ -51,9 +51,7 @@ void ABossCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ABossCharacter::DetectPawn(APawn* DetectedPawn, APawn* PawnToDetect)
 {
-	EEnemyState CurrentState {
-		static_cast<EEnemyState>(BlackboardComp->GetValueAsEnum(TEXT("CurrentState")))
-	};
+	EEnemyState CurrentState { static_cast<EEnemyState>(BlackboardComp->GetValueAsEnum(TEXT("CurrentState"))) };
 	
 	if (DetectedPawn != PawnToDetect || CurrentState != EEnemyState::Idle) { return; }
 

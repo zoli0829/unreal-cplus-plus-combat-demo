@@ -17,6 +17,6 @@ void UBTS_PlayerDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* Nod
 
 UBTS_PlayerDistance::UBTS_PlayerDistance()
 {
-	// If I plan to have multiple characters of this kind in the level
+	// If I plan to have multiple enemies of this kind in the level
 	bCreateNodeInstance = true;
 }

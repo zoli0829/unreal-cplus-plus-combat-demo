@@ -42,20 +42,12 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 		FQuat ShapeRotation { SkeletalComp->GetSocketQuaternion(Socket.Rotation) };
 
 		TArray<FHitResult> OutResults;
-		double WeaponDistance {
-			FVector::Distance( StartSocketLocation, EndSocketLocation) };
-		FVector BoxHalfExtent {
-			BoxCollisionLength, BoxCollisionLength, WeaponDistance
-		};
+		double WeaponDistance { FVector::Distance( StartSocketLocation, EndSocketLocation) };
+		FVector BoxHalfExtent { BoxCollisionLength, BoxCollisionLength, WeaponDistance };
 		BoxHalfExtent /= 2;
-		FCollisionShape Box {
-			FCollisionShape::MakeBox(BoxHalfExtent)
-		};
-		FCollisionQueryParams IgnoreParams {
-			FName { TEXT("Ignore Params") },
-			false,
-			GetOwner()
-		};
+		
+		FCollisionShape Box { FCollisionShape::MakeBox(BoxHalfExtent) };
+		FCollisionQueryParams IgnoreParams { FName { TEXT("Ignore Params") },false,GetOwner() };
 	
 		bool bHasFoundTargets { GetWorld()->SweepMultiByChannel(
 			OutResults,

@@ -14,8 +14,6 @@ ULockonComponent::ULockonComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -28,7 +26,6 @@ void ULockonComponent::BeginPlay()
 	Controller = GetWorld()->GetFirstPlayerController();
 	MovementComp = OwnerRef->GetCharacterMovement();
 	SpringArmComp = OwnerRef->FindComponentByClass<USpringArmComponent>();
-	
 }
 
 // Called every frame
@@ -50,7 +47,6 @@ void ULockonComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	}
 
 	TargetLocation.Z -= 125;
-
 	FRotator NewRotation { UKismetMathLibrary::FindLookAtRotation(CurrentLocation, TargetLocation) };
 
 	Controller->SetControlRotation(NewRotation);
@@ -61,20 +57,15 @@ void ULockonComponent::StartLockon(float Radius)
 	FHitResult OutResult;
 	FVector CurrentLocation { OwnerRef->GetActorLocation() };
 	FCollisionShape Sphere { FCollisionShape::MakeSphere(Radius) };
-	FCollisionQueryParams IgnoreParams {
-		FName { TEXT("Ignore Collision Params") },
-		false,
-		OwnerRef
-	};
+	FCollisionQueryParams IgnoreParams {FName { TEXT("Ignore Collision Params") }, false, OwnerRef};
 	
 	bool bHasFroundTarget { GetWorld()->SweepSingleByChannel(OutResult,
 		CurrentLocation,
 		CurrentLocation,
-		FQuat::Identity,
-		ECollisionChannel::ECC_GameTraceChannel1,
+		FQuat::Identity,ECollisionChannel::ECC_GameTraceChannel1,
 		Sphere,
-		IgnoreParams
-		) };
+		IgnoreParams)
+	};
 
 	if ( !bHasFroundTarget ) { return; }
 

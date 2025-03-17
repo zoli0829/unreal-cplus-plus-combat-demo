@@ -26,13 +26,12 @@ void UBTT_ChargeAttack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 	OwnerComp.GetBlackboardComponent()->SetValueAsEnum(TEXT("CurrentState"), EEnemyState::Melee);
 
 	ControllerRef->ReceiveMoveCompleted.Remove(MoveCompletedDelegate);
-	
 	FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
 }
 
 UBTT_ChargeAttack::UBTT_ChargeAttack()
 {
-	// If I plan to have multiple characters of this kind in the level
+	// If I plan to have multiple enemies of this kind in the level
 	bCreateNodeInstance = true;
 	
 	bNotifyTick = true;
@@ -51,7 +50,6 @@ EBTNodeResult::Type UBTT_ChargeAttack::ExecuteTask(UBehaviorTreeComponent& Owner
 	OwnerComp.GetBlackboardComponent()->SetValueAsBool("IsReadyToCharge", false);
 
 	bIsFinished = false;
-	
 	return EBTNodeResult::InProgress;
 }
 
