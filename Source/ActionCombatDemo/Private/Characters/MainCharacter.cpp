@@ -70,4 +70,26 @@ void AMainCharacter::EndLockonWithActor(AActor* ActorRef)
 	LockonComp->EndLockon();
 }
 
+bool AMainCharacter::CanTakeDamage(AActor* Opponent)
+{
+	if (PlayerActionsComp->bIsRollActive) { return false; }
+	
+	if (PlayerAnim->bIsBlocking)
+	{
+		return BlockComp->Check(Opponent);
+	}
+	
+	return true;
+}
+
+void AMainCharacter::PlayHurtAnim(TSubclassOf<class UCameraShakeBase> CameraShakeTemplate)
+{
+	PlayAnimMontage(HurtAnimMontage);
+
+	if (CameraShakeTemplate)
+	{
+		GetController<APlayerController>()->ClientStartCameraShake(CameraShakeTemplate);
+	}
+}
+
 

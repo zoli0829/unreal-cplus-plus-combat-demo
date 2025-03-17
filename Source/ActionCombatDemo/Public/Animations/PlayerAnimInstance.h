@@ -28,6 +28,9 @@ protected:
 	float CurrentDirection { 0.0f };
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsBlocking { false };
+	
 	UFUNCTION(BlueprintCallable)
 	void HandleUpdatedTarget(AActor* NewTargetActorRef);
 

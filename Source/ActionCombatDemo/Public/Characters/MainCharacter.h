@@ -16,6 +16,9 @@ class ACTIONCOMBATDEMO_API AMainCharacter : public ACharacter, public IMainPlaye
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* DeathAnimMontage;
 
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* HurtAnimMontage;
+
 public:
 	// Sets default values for this character's properties
 	AMainCharacter();
@@ -61,4 +64,9 @@ public:
 	void HandleDeath();
 
 	virtual void EndLockonWithActor(AActor* ActorRef) override;
+
+	virtual bool CanTakeDamage(AActor* Opponent) override;
+
+	UFUNCTION(BlueprintCallable)
+	void PlayHurtAnim(TSubclassOf<class UCameraShakeBase> CameraShakeTemplate);
 };
